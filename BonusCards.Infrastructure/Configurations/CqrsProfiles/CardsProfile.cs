@@ -3,6 +3,7 @@ using BonusCards.Domain.Entities;
 using BonusCards.Infrastructure.Commands.Cards;
 using BonusCards.Infrastructure.Commands.Cards.Handlers;
 using BonusCards.Infrastructure.Cqrs;
+using BonusCards.Infrastructure.Dtos;
 using BonusCards.Infrastructure.Queries.Cards;
 using BonusCards.Infrastructure.Queries.Cards.Handlers;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,9 +27,8 @@ namespace BonusCards.Infrastructure.Configurations.CqrsProfiles
 
         public void ConfigureQueries()
         {
-            _services.AddTransient<IQueryHandler<Find, Card>, FindHandler>();
-            _services.AddTransient<IQueryHandler<FindAll, IEnumerable<Card>>, FindAllHandler>();
-            _services.AddTransient<IQueryHandler<BonusesAvailable, int>, BonusesAvailableHandler>();
+            _services.AddTransient<IQueryHandler<Find, CardDto>, FindHandler>();
+            _services.AddTransient<IQueryHandler<FindAll, IEnumerable<CardDto>>, FindAllHandler>();
         }
     }
 }

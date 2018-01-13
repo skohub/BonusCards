@@ -43,10 +43,11 @@ namespace BonusCards.Web
                 c.DefaultChallengeScheme = "JwtBearer";
             }).AddJwtBearer("JwtBearer", options =>
             {
+                var secret = Encoding.UTF8.GetBytes(Configuration["Authorization Key"]);
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authorization Key"])),
+                    IssuerSigningKey = new SymmetricSecurityKey(secret),
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ValidateLifetime = false,

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BonusCards.Domain.Context;
-using BonusCards.Domain.Entities;
 using BonusCards.Infrastructure.Cqrs;
+using BonusCards.Infrastructure.Dtos;
+using Microsoft.EntityFrameworkCore;
 
 namespace BonusCards.Infrastructure.Queries.Cards.Handlers
 {
-    public class FindAllHandler : IQueryHandler<FindAll, IEnumerable<Card>>
+    public class FindAllHandler : IQueryHandler<FindAll, IEnumerable<CardDto>>
     {
         private readonly BonusCardsContext _context;
 
@@ -15,10 +16,13 @@ namespace BonusCards.Infrastructure.Queries.Cards.Handlers
             _context = context;
         }
 
-        public IEnumerable<Card> Query(FindAll query)
+        public IEnumerable<CardDto> Query(FindAll query)
         {
-            return _context.Cards.ToList();
-            
+            var dtos = _context.Cards
+                .Include(c => c.Purchases)
+                .Include(c => c.Withdraws)
+                .Select(c => new CardDto {Id = c.Id, Bonuses = c.GetAvailableBonuses()});
+            return dtos;
         }
     }
 }

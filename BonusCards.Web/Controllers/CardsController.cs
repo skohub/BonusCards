@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using BonusCards.Domain.Entities;
 using BonusCards.Infrastructure.Commands.Cards;
 using BonusCards.Infrastructure.Cqrs;
+using BonusCards.Infrastructure.Dtos;
 using BonusCards.Infrastructure.Queries.Cards;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +25,7 @@ namespace BonusCards.Web.Controllers
         public IActionResult Get()
         {
             var query = new FindAll();
-            return Ok(_bus.Query<FindAll, IEnumerable<Card>>(query));
+            return Ok(_bus.Query<FindAll, IEnumerable<CardDto>>(query));
         }
 
         // GET: api/Cards/5
@@ -33,7 +33,7 @@ namespace BonusCards.Web.Controllers
         public IActionResult Get(int id)
         {
             var query = new Find{Id = id};
-            var card = _bus.Query<Find, Card>(query);
+            var card = _bus.Query<Find, CardDto>(query);
             if (card == null)
             {
                 return NotFound();
@@ -41,15 +41,6 @@ namespace BonusCards.Web.Controllers
             return Ok(card);
         }
 
-        // Get: api/Cards/BonusesAvailable
-        [HttpGet("{id}/BonusesAvailable")]
-        public IActionResult BonusesAvailable(int id)
-        {
-            var query = new BonusesAvailable{CardId = id};
-            var bonuses = _bus.Query<BonusesAvailable, int>(query);
-            return Ok(bonuses);
-        }
-        
         // POST: api/Cards
         [HttpPost]
         public void Post([FromBody]CreateWithCustomer command)
