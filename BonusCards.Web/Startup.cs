@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 using BonusCards.Infrastructure.Cqrs;
 using BonusCards.Infrastructure.Configurations;
 using BonusCards.Infrastructure.Helpers;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace BonusCards.Web
@@ -31,8 +33,24 @@ namespace BonusCards.Web
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
                 var xmlPath = Path.Combine(basePath, "BonusCards.Web.xml");
                 c.IncludeXmlComments(xmlPath);
-                c.AddSecurityDefinition("apiKey", new ApiKeyScheme { Name = "apiKey", In = "header" });
+                c.AddSecurityDefinition("JwtKey", new ApiKeyScheme { Name = "Authorization", In = "header" });
                 c.CustomSchemaIds(x => x.FullName);
+            });
+
+            services.AddAuthentication(c =>
+            {
+                c.DefaultAuthenticateScheme = "JwtBearer";
+                c.DefaultChallengeScheme = "JwtBearer";
+            }).AddJwtBearer("JwtBearer", options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authorization Key"])),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false,
+                };
             });
 
             DbConfig.Configure(services, Configuration["ConnectionString"]);
@@ -59,6 +77,8 @@ namespace BonusCards.Web
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }

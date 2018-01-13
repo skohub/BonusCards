@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BonusCards.Infrastructure",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BonusCards.Web", "BonusCards.Web\BonusCards.Web.csproj", "{1C81E156-DEB1-4A92-8DB1-B719880C1564}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BonusCards.Tests", "BonusCards.Tests\BonusCards.Tests.csproj", "{7FD2F2E4-F28B-49EA-8642-87EBB0EA21B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BonusCards.Tests", "BonusCards.Tests\BonusCards.Tests.csproj", "{7FD2F2E4-F28B-49EA-8642-87EBB0EA21B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BonusCards.TokenGenerator", "BonusCards.TokenGenerator\BonusCards.TokenGenerator.csproj", "{7BBF30CB-575C-4675-8DF0-DDDDCA60C3A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7FD2F2E4-F28B-49EA-8642-87EBB0EA21B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FD2F2E4-F28B-49EA-8642-87EBB0EA21B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FD2F2E4-F28B-49EA-8642-87EBB0EA21B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BBF30CB-575C-4675-8DF0-DDDDCA60C3A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BBF30CB-575C-4675-8DF0-DDDDCA60C3A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BBF30CB-575C-4675-8DF0-DDDDCA60C3A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BBF30CB-575C-4675-8DF0-DDDDCA60C3A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

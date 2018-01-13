@@ -3,10 +3,12 @@ using BonusCards.Domain.Entities;
 using BonusCards.Infrastructure.Commands.Cards;
 using BonusCards.Infrastructure.Cqrs;
 using BonusCards.Infrastructure.Queries.Cards;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BonusCards.Web.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/Cards")]
     public class CardsController : Controller

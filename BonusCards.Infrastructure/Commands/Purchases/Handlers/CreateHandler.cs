@@ -20,7 +20,7 @@ namespace BonusCards.Infrastructure.Commands.Purchases.Handlers
             var card = _context.Cards
                 .Include(c => c.Purchases)
                 .First(c => c.Id == command.CardId);
-            card.AddPurchase(command.Price, new PercentStrategy());
+            card.AddPurchase(command.Price, new PercentStrategy(10));
         }
     }
 }

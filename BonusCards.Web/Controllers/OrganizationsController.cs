@@ -1,9 +1,11 @@
 ﻿using BonusCards.Infrastructure.Cqrs;
 using BonusCards.Infrastructure.Commands.Organizations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BonusCards.Web.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/Organizations")]
     public class OrganizationsController : Controller

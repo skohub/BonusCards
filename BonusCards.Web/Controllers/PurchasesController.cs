@@ -1,9 +1,11 @@
 ﻿using BonusCards.Infrastructure.Commands.Purchases;
 using BonusCards.Infrastructure.Cqrs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BonusCards.Web.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/Purchases")]
     public class PurchasesController : Controller
