@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text;
+using System.Collections.Generic;
 using BonusCards.Infrastructure.Cqrs;
 using BonusCards.Infrastructure.Configurations;
 using BonusCards.Infrastructure.Helpers;
@@ -34,6 +35,10 @@ namespace BonusCards.Web
                 var xmlPath = Path.Combine(basePath, "BonusCards.Web.xml");
                 c.IncludeXmlComments(xmlPath);
                 c.AddSecurityDefinition("JwtKey", new ApiKeyScheme { Name = "Authorization", In = "header" });
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "JwtKey", new List<string>() }
+                });
                 c.CustomSchemaIds(x => x.FullName);
             });
 
