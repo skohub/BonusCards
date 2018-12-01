@@ -3,7 +3,6 @@ using System.Text;
 using System.Collections.Generic;
 using BonusCards.Infrastructure.Cqrs;
 using BonusCards.Infrastructure.Configurations;
-using BonusCards.Infrastructure.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -61,7 +60,7 @@ namespace BonusCards.Web
 
             DbConfig.Configure(services, Configuration["ConnectionString"]);
 
-            services.AddTransient<IContextServiceProvider, ContextServiceProvider>();
+            services.AddTransient<IServiceLocator, ServiceLocator>();
             CqrsConfig.Configure(services);
 
             services.AddScoped<CqrsBus>();

@@ -1,15 +1,14 @@
 ﻿using System;
 using BonusCards.Domain.Context;
-using BonusCards.Infrastructure.Helpers;
 
 namespace BonusCards.Infrastructure.Cqrs
 {
     public class CqrsBus : IUnitOfWork
     {
-        private readonly IContextServiceProvider _services;
+        private readonly IServiceLocator _services;
         private readonly BonusCardsContext _context;
 
-        public CqrsBus(IContextServiceProvider services, BonusCardsContext context)
+        public CqrsBus(IServiceLocator services, BonusCardsContext context)
         {
             _services = services;
             _context = context;
